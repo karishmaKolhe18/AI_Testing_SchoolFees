@@ -32,8 +32,7 @@ try:
         predicted_fee = model.predict([[grade]]).item()  # Convert array to scalar
         print(
             f"Predicted fee for grade {grade}: "
-            f"{predicted_fee:.2f}"
-        )
+            f"{predicted_fee:.2f}")
 
 except Exception as e:
     print(f"An error occurred during prediction: {e}")
