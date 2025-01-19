@@ -1,1 +1,67 @@
+name: CI/CD Pipeline for School Fees Prediction
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Step 4: Test the prediction script
+    - name: Run Prediction Script
+      run: |
+        python scripts/prediction_script.py
+
+    # Step 5: Archive and upload the model (optional)
+    - name: Upload model file
+      uses: actions/upload-artifact@v3
+      with:
+        name: trained-model
+        path: models/linear_regression_model.pkl
+
+  linting:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python environment
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    # Step 3: Install linting tools
+    - name: Install linting tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8
+
+    # Step 4: Run linter
+    - name: Lint code
+      run: |
+        flake8 scripts
