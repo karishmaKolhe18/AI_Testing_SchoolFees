@@ -27,8 +27,8 @@ except FileNotFoundError:
 try:
     for index, row in test_data.iterrows():
         grade = row['Grade']
-        # Predict school fees for the grade
-        predicted_fee = model.predict([[grade]])[0]
+        # Predict school fees for the grade and extract scalar value
+        predicted_fee = float(model.predict([[grade]])[0])
         print(
             f"Predicted fee for grade {grade}: "
             f"{predicted_fee:.2f}"
