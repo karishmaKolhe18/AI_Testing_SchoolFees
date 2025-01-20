@@ -37,7 +37,7 @@ if 'Grade' not in test_data.columns:
 # Perform predictions and extract scalar values
 try:
     predictions = model.predict(test_data[['Grade']])
-    test_data['Predicted Fee'] = predictions.flatten()  # Ensure scalar values are stored
+    test_data['Predicted Fee'] = predictions.flatten()  # Ensure scalar values
     print("Predictions completed successfully.")
 except NotFittedError:
     print("Error: Model is not properly trained.")
@@ -60,4 +60,6 @@ print("Predicted Fees for Each Grade:")
 for index, row in test_data.iterrows():
     grade = row['Grade']
     predicted_fee = row['Predicted Fee']
-    print(f"Predicted fee for grade {int(grade)}: {predicted_fee:.2f}")
+    print(
+        f"Predicted fee for grade {int(grade)}: {predicted_fee:.2f}"
+    )
