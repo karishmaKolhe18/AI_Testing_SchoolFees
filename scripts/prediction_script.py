@@ -34,14 +34,12 @@ if 'Grade' not in test_data.columns:
     print("Error: Test data must contain a 'Grade' column.")
     exit()
 
-# Perform predictions and extract scalar values
+# Perform predictions and reverse the log transformation
 try:
-    predictions = model.predict(test_data[['Grade']])
-    test_data['Predicted Fee'] = predictions.flatten()
+    log_predictions = model.predict(test_data[['Grade']])
+    # Reverse the transformation
+    test_data['Predicted Fee'] = np.exp(log_predictions)  
     print("Predictions completed successfully.")
-except NotFittedError:
-    print("Error: Model is not properly trained.")
-    exit()
 except Exception as e:
     print(f"Error during prediction: {e}")
     exit()
