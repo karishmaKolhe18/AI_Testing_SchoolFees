@@ -43,7 +43,7 @@ if test_data['Grade'].isnull().any():
 # Perform predictions and reverse the log transformation
 try:
     log_predictions = model.predict(test_data[['Grade']])
-    test_data['Predicted Fee'] = np.exp(log_predictions)  # Reverse the transformation
+    test_data['Predicted Fee'] = np.exp(log_predictions)
     print("Predictions completed successfully.")
 except Exception as e:
     print(f"Error during prediction: {e}")
@@ -63,4 +63,7 @@ print("Predicted Fees for Each Grade:")
 for index, row in test_data.iterrows():
     grade = row['Grade']
     predicted_fee = row['Predicted Fee']
-    print(f"Grade {int(grade)}: Fee Prediction = {predicted_fee:.2f}")
+    print(
+        f"Grade {int(grade)}: Fee Prediction = "
+        f"{predicted_fee:.2f}"
+    )
