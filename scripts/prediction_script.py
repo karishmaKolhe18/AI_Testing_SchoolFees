@@ -1,7 +1,6 @@
 import pickle
 import pandas as pd
 import numpy as np
-from sklearn.exceptions import NotFittedError
 
 # Set paths to the model and test data
 model_path = 'models/linear_regression_model.pkl'  # Path to the model file
@@ -44,8 +43,7 @@ if test_data['Grade'].isnull().any():
 # Perform predictions and reverse the log transformation
 try:
     log_predictions = model.predict(test_data[['Grade']])
-    # Reverse the transformation
-    test_data['Predicted Fee'] = np.exp(log_predictions)  
+    test_data['Predicted Fee'] = np.exp(log_predictions)  # Reverse the transformation
     print("Predictions completed successfully.")
 except Exception as e:
     print(f"Error during prediction: {e}")
@@ -65,6 +63,4 @@ print("Predicted Fees for Each Grade:")
 for index, row in test_data.iterrows():
     grade = row['Grade']
     predicted_fee = row['Predicted Fee']
-    print(
-        f"Grade {int(grade)}: Fee Prediction = {predicted_fee:.2f}"
-    )
+    print(f"Grade {int(grade)}: Fee Prediction = {predicted_fee:.2f}")
