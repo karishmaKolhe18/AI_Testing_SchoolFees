@@ -4,10 +4,8 @@ import numpy as np
 from sklearn.exceptions import NotFittedError
 
 # Set paths to the model and test data
-# Path to the model file
-model_path = 'models/linear_regression_model.pkl'  
-# Path to the test data CSV
-test_data_path = 'data/school_fees_data.csv'  
+model_path = 'models/linear_regression_model.pkl'  # Path to the model file
+test_data_path = 'data/school_fees_data.csv'  # Path to the test data CSV
 
 # Load the model
 try:
