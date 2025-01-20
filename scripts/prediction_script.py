@@ -1,11 +1,10 @@
-import os
 import pickle
 import pandas as pd
 from sklearn.exceptions import NotFittedError
 
 # Set paths to the model and test data
 model_path = 'models/linear_regression_model.pkl'  # Path to the model file
-test_data_path = 'data/school_fees_data.csv'  # Path to the test data CSV
+test_data_path = 'data/school_fees_test.csv'  # Path to the test data CSV
 
 # Load the model
 try:
