@@ -1,10 +1,13 @@
 import pickle
 import pandas as pd
+import numpy as np
 from sklearn.exceptions import NotFittedError
 
 # Set paths to the model and test data
-model_path = 'models/linear_regression_model.pkl'  # Path to the model file
-test_data_path = 'data/school_fees_data.csv'  # Path to the test data CSV
+# Path to the model file
+model_path = 'models/linear_regression_model.pkl'  
+# Path to the test data CSV
+test_data_path = 'data/school_fees_data.csv'  
 
 # Load the model
 try:
@@ -32,6 +35,12 @@ except Exception as e:
 # Ensure the test data contains the expected 'Grade' column
 if 'Grade' not in test_data.columns:
     print("Error: Test data must contain a 'Grade' column.")
+    exit()
+
+# Ensure 'Grade' column is numeric
+test_data['Grade'] = pd.to_numeric(test_data['Grade'], errors='coerce')
+if test_data['Grade'].isnull().any():
+    print("Error: 'Grade' column contains non-numeric values.")
     exit()
 
 # Perform predictions and reverse the log transformation
